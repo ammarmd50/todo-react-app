@@ -1,0 +1,116 @@
+/* .app {
+  text-align: center;
+  padding: 2rem;
+  font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+} */
+
+
+/* General Reset */
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #f3f4f6;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* App Component Styles */
+  .app-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* shadow-lg */
+    max-width: 32rem; /* max-w-lg */
+    margin: 3rem auto; /* mx-auto mt-12 */
+  }
+
+  h1 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  h2.todo-title {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: 600; /* font-semibold */
+    color: #374151; /* text-gray-700 */
+    margin-bottom: 0.75rem;
+  }
+
+  /* TodoHeader Styles */
+  .todo-header {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .todo-header input {
+    flex-grow: 1;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  /* Task Component Styles */
+  .task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .task-content {
+    flex-grow: 1;
+    margin-right: 10px;
+  }
+
+  .task-actions {
+    display: flex;
+    gap: 5px;
+  }
+
+  .edit-input {
+    width: 100%;
+    padding: 5px;
+  }
+
+  /* Button Styles */
+  button {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    color: white;
+    transition: background 0.2s;
+  }
+
+  .btn-add {
+    background-color: #10b981; /* Green */
+  }
+  .btn-add:hover { background-color: #059669; }
+
+  .btn-delete {
+    background-color: #ef4444; /* Red */
+    padding: 0.25rem 0.75rem;
+  }
+  .btn-delete:hover { background-color: #dc2626; }
+
+  .btn-edit {
+    background-color: #3b82f6; /* Blue */
+    padding: 0.25rem 0.75rem;
+  }
+  .btn-edit:hover { background-color: #2563eb; }
+
+  .btn-save {
+    background-color: #10b981; /* Green for save */
+    padding: 0.25rem 0.75rem;
+  }
