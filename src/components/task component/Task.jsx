@@ -1,45 +1,44 @@
 //Task.jsx
+import { deleteTask, updateTask } from "../../utilities/api";
 import { useState } from "react";
 // import "./Task.css";
 
 function Task({ task, index, setTaskArray }) {
 
   const [isEditing, setIsEditing] = useState(false);
-  const [editValue, setEditValue] = useState(task);
+  const [editValue, setEditValue] = useState(task.title);
 
-//   const edit = () => {
-//     console.log("setTaskArray ", setTaskArray);
+  // UI + DB delete
+  const handleDelete = async () => {
+    try {
+      await deleteTask(task._id);
 
-//     // setTaskArray((lastVal) => {
-//     //   console.log("index ", index);
-//     //   console.log("lastVal ", lastVal);
-//     //   lastVal[index] = "deleted";
-//     //   return lastVal;
-//     // });
-
-//     setTaskArray((lastVal) => {
-//   const newArray = [...lastVal];
-//   newArray[index] = "deleted";
-//   return newArray;w
-// });
-//   };
-
- const deleteTask = () => {
-    setTaskArray((lastVal) => {
-      return lastVal.filter((task, i) => i !== 
-      index);
-    });
+      setTaskArray((lastVal) => {
+        return lastVal.filter((t) => t._id !== task._id);
+      });
+    } catch (err) {
+      console.error("Delete error:", err);
+    }
   };
 
-  const saveTask = () => {
-    setTaskArray((lastVal) => {
-      const newArray = [...lastVal];
-      newArray[index] = editValue;
-      return newArray;
-    });
-    setIsEditing(false);
-  };
+  // UI + DB update
+  const saveTask = async () => {
+    try {
+      const updatedData = { title: editValue };
 
+      const updatedTask = await updateTask(task._id, updatedData);
+
+      setTaskArray((lastVal) => {
+        const newArray = [...lastVal];
+        newArray[index] = { ...task, title: editValue };
+        return newArray;
+      });
+
+      setIsEditing(false);
+    } catch (err) {
+      console.error("Update error:", err);
+    }
+  };
 
   return (
     <div className="task-item">
@@ -52,7 +51,7 @@ function Task({ task, index, setTaskArray }) {
             onChange={(e) => setEditValue(e.target.value)}
           />
         ) : (
-          <span>{task}</span>
+          <span>{task.title}</span>
         )}
       </div>
       
@@ -67,7 +66,7 @@ function Task({ task, index, setTaskArray }) {
           </button>
         )}
 
-        <button className="btn-delete" onClick={deleteTask}>
+        <button className="btn-delete" onClick={handleDelete}>
          DELETE 
         </button>
       </div>

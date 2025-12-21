@@ -1,34 +1,44 @@
 //TodoHeader.jsx
 
 import { useState } from "react";
+import { createTask } from "../../utilities/api.js";
 
-function TodoHeader({ setTaskArray }) {
+function TodoHeader({ setTaskArray, userId }) {
   const [taskInput, setTaskInput] = useState("");
 
-  const addTask = () => {
+  const addTask = async () => {
+    if (taskInput.trim() === "") return;
 
-     if (taskInput.trim() === "") return;
+    try {
+      //   New fetch request to add task to backend
+      const res = await createTask(taskInput, " ", userId);
 
-    // 1st way
-    // const newTasks = [...taskArray, taskInput];
-    // setTaskArray(newTasks);
+      //   Keep UI update
+      setTaskArray((lastValue) => [...lastValue, res]);
 
-    // 2nd way
-    setTaskArray((lastValue) => [...lastValue, taskInput]);
-
-    setTaskInput("");
+      setTaskInput("");
+    } catch (error) {
+      console.error("Error adding task:", error);
+    }
   };
 
   return (
-    <div  className="todo-header" >
-      <input type="text" value={taskInput} 
-      onChange={(e) => setTaskInput(e.target.value)} 
-       placeholder="Add a new task..." />
-     
-      <button className="btn-add" onClick= {addTask}>
+    <div className="todo-header">
+      <input
+        id="username"
+        name="username"
+        autoComplete="task"
+        type="text"
+        value={taskInput}
+        onChange={(e) => setTaskInput(e.target.value)}
+        placeholder="Add a new task..."
+      />
+
+      <button className="btn-add" onClick={addTask}>
         Add
       </button>
     </div>
   );
 }
+
 export { TodoHeader };

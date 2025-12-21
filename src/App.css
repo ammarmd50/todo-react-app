@@ -35,6 +35,7 @@
   }
 
   h2.todo-title {
+    /* align-items: center; */
     font-size: 1.5rem; /* text-2xl */
     font-weight: 600; /* font-semibold */
     color: #374151; /* text-gray-700 */
@@ -114,3 +115,32 @@
     background-color: #10b981; /* Green for save */
     padding: 0.25rem 0.75rem;
   }
+
+
+  /* 🔹 Start Button Styling */
+.start-btn {
+  background-color: #4f46e5; /* Indigo */
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.start-btn:hover {
+  background-color: #4338ca;
+  transform: scale(1.05);
+}
+
+.start-btn:active {
+  transform: scale(0.97);
+}
+
+.start-btn:disabled {
+  background-color: #a5b4fc;
+  cursor: not-allowed;
+}
