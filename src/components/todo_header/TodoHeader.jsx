@@ -1,5 +1,3 @@
-//TodoHeader.jsx
-
 import { useState } from "react";
 import { createTask } from "../../utilities/api.js";
 
@@ -14,8 +12,11 @@ function TodoHeader({ setTaskArray, userId }) {
       const res = await createTask(taskInput, " ", userId);
 
       //   Keep UI update
-      setTaskArray((lastValue) => [...lastValue, res]);
-
+      const newTask = {
+        title: res.title,
+        taskId: res.taskId,
+      };
+      setTaskArray((prev) => [...prev, newTask]);
       setTaskInput("");
     } catch (error) {
       console.error("Error adding task:", error);
