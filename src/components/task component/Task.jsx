@@ -7,15 +7,16 @@ function Task({ task, index, setTaskArray }) {
 
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(task.title);
-
+  const taskId = task.taskId; 
   // UI + DB delete
   const handleDelete = async () => {
     try {
-      await deleteTask(task._id);
+      await deleteTask(taskId);
 
-      setTaskArray((lastVal) => {
-        return lastVal.filter((t) => t._id !== task._id);
-      });
+      setTaskArray((lastVal) =>
+        lastVal.filter((t) => t.taskId !== taskId)
+    );
+
     } catch (err) {
       console.error("Delete error:", err);
     }
@@ -26,14 +27,15 @@ function Task({ task, index, setTaskArray }) {
     try {
       const updatedData = { title: editValue };
 
-      const updatedTask = await updateTask(task._id, updatedData);
-
-      setTaskArray((lastVal) => {
-        const newArray = [...lastVal];
-        newArray[index] = { ...task, title: editValue };
-        return newArray;
-      });
-
+      const res = await updateTask(taskId,updatedData);
+      //  const editedTask ={
+      //   title: res.title
+      //  }  
+        setTaskArray(prev =>
+          prev.map(t =>
+            t.taskId === task.taskId ? res : t
+          )
+        );      // setTaskArray((lastVal) => [...lastVal, editedTask]);
       setIsEditing(false);
     } catch (err) {
       console.error("Update error:", err);
