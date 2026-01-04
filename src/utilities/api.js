@@ -1,7 +1,7 @@
 // Api.js for backend communication
 
 import axios from "axios";
-import { apiBaseUri } from "../config/api.config";
+import { apiBaseUri } from "../config/api.config.js";
 
 // ..................create task handler..................
 export const createTask = async (title, description) => {

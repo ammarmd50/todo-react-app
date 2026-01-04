@@ -4,6 +4,7 @@ import Signup from "./pages/auth/sign-Up.jsx";
 import TodoDashboard from "./pages/DashBoard/TodoDashBoard.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { apiBaseUri } from "./config/api.config.js";
 
 function App() {
   const [auth, setAuth] = useState(false);
@@ -11,8 +12,7 @@ function App() {
 
   const getAuth = async () => {
     axios
-      .get("http://localhost:3000/auth/me",
-         { withCredentials: true })
+      .get(`${apiBaseUri}/auth/me`, { withCredentials: true })
       .then((res) => {
         console.log("AUTH USER:", res.data.user);
         setUser(res.data.user);
@@ -49,4 +49,3 @@ function App() {
 }
 
 export default App;
-
