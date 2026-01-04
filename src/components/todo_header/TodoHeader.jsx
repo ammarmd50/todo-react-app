@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createTask } from "../../utilities/api.js";
+import "./Header.css";
 
 function TodoHeader({ setTaskArray, userId }) {
   const [taskInput, setTaskInput] = useState("");

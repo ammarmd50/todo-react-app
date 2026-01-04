@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { TodoHeader } from "../../components/todo_header/TodoHeader";
 import { Task } from "../../components/task component/Task";
+import "../../App.css";
 
 function TodoDashboard({ user, auth }) {
   const navigate = useNavigate();
@@ -64,7 +65,9 @@ function TodoDashboard({ user, auth }) {
         <Task key={task.taskId} task={task} setTaskArray={setTaskArray} />
       ))}
 
-      <button onClick={handleLogout}>Logout</button>
+      <button className="btn-logout" onClick={handleLogout}>
+        Logout
+        </button>
 
       <p>
         <Link to="/login">Go to Login</Link>

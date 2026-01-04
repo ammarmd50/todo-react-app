@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { signUpApiHandler } from "../../utilities/api";
-import { getUserToken } from "../../utilities/getUserToken";
-import axios from "axios";
-
+import "./auth.css";
 export default function SignUp({ auth, setAuth }) {
   const navigate = useNavigate();
 

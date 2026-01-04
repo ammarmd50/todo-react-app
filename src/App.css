@@ -1,146 +1,48 @@
-/* .app {
-  text-align: center;
+:root {
+  --primary-color: #646cff;
+  --bg-color: #f4f7f6;
+  --card-bg: #ffffff;
+  --text-main: #333;
+  --text-muted: #666;
+  --danger: #ff4d4d;
+  --success: #2ecc71;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  display: flex;
+  justify-content: center;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
   padding: 2rem;
-  font-family: "Poppins", sans-serif;
-  font-family: "Poppins", sans-serif;
-  color: #333;
-} */
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
 
-
-/* General Reset */
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    background-color: #f3f4f6;
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* App Component Styles */
-  .app-container {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 0.75rem; /* rounded-xl */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* shadow-lg */
-    max-width: 32rem; /* max-w-lg */
-    margin: 3rem auto; /* mx-auto mt-12 */
-  }
-
-  h1 {
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-  }
-
-  h2.todo-title {
-    /* align-items: center; */
-    font-size: 1.5rem; /* text-2xl */
-    font-weight: 600; /* font-semibold */
-    color: #374151; /* text-gray-700 */
-    margin-bottom: 0.75rem;
-  }
-
-  /* TodoHeader Styles */
-  .todo-header {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .todo-header input {
-    flex-grow: 1;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-
-  /* Task Component Styles */
-  .task-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem;
-    background-color: #f9fafb;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.375rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .task-content {
-    flex-grow: 1;
-    margin-right: 10px;
-  }
-
-  .task-actions {
-    display: flex;
-    gap: 5px;
-  }
-
-  .edit-input {
-    width: 100%;
-    padding: 5px;
-  }
-
-  /* Button Styles */
-  button {
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
-    color: white;
-    transition: background 0.2s;
-  }
-
-  .btn-add {
-    background-color: #10b981; /* Green */
-  }
-  .btn-add:hover { background-color: #059669; }
-
-  .btn-delete {
-    background-color: #ef4444; /* Red */
-    padding: 0.25rem 0.75rem;
-  }
-  .btn-delete:hover { background-color: #dc2626; }
-
-  .btn-edit {
-    background-color: #3b82f6; /* Blue */
-    padding: 0.25rem 0.75rem;
-  }
-  .btn-edit:hover { background-color: #2563eb; }
-
-  .btn-save {
-    background-color: #10b981; /* Green for save */
-    padding: 0.25rem 0.75rem;
-  }
-
-
-  /* 🔹 Start Button Styling */
-.start-btn {
-  background-color: #4f46e5; /* Indigo */
-  color: white;
-  border: none;
-  padding: 10px 18px;
-  margin-left: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: 6px;
+button {
   cursor: pointer;
-  transition: all 0.2s ease;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: opacity 0.2s;
 }
 
-.start-btn:hover {
-  background-color: #4338ca;
-  transform: scale(1.05);
+button:hover {
+  opacity: 0.8;
 }
 
-.start-btn:active {
-  transform: scale(0.97);
-}
-
-.start-btn:disabled {
-  background-color: #a5b4fc;
-  cursor: not-allowed;
+input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
 }

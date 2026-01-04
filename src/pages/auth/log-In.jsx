@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginApiHandler } from "../../utilities/api";
-
+import "./auth.css";
 function Login({ auth,setAuth}) {
   const navigate = useNavigate();
   // if (auth === true) {
