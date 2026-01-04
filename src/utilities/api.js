@@ -1,7 +1,7 @@
 // Api.js for backend communication
 
-import axios from "axios";
 import { apiBaseUri } from "../config/api.config.js";
+import authAxios from "../config/axios.config.js";
 
 // ..................create task handler..................
 export const createTask = async (title, description) => {
@@ -10,9 +10,10 @@ export const createTask = async (title, description) => {
     description: description,
     status: "pending",
   };
-  const res = await axios.post(`${apiBaseUri}/tasks`, payload, {
-    withCredentials: true,
-  });
+  const res = await authAxios.post(`${apiBaseUri}/tasks`, payload);
+  // const res = await authAxios.post(`${apiBaseUri}/tasks`, payload, {
+  //   withCredentials: true,
+  // });
 
   return res.data;
 };
@@ -25,9 +26,10 @@ export const signUpApiHandler = async (name, email, password) => {
     password: password,
   };
 
-  const axiosRes = await axios.post(`${apiBaseUri}/auth/signup`, payload, {
-    withCredentials: true,
-  });
+  const axiosRes = await authAxios.post(`${apiBaseUri}/auth/signup`, payload);
+  // const axiosRes = await authAxios.post(`${apiBaseUri}/auth/signup`, payload, {
+  //   withCredentials: true,
+  // });
 
   return axiosRes.data;
 };
@@ -39,17 +41,19 @@ export const loginApiHandler = async (email, password) => {
     password: password,
   };
 
-  const axiosRes = await axios.post(`${apiBaseUri}/auth/login`, payload, {
-    withCredentials: true,
-  });
+  const axiosRes = await authAxios.post(`${apiBaseUri}/auth/login`, payload);
+  // const axiosRes = await authAxios.post(`${apiBaseUri}/auth/login`, payload, {
+  //   withCredentials: true,
+  // });
   return axiosRes.data;
 };
 
 //..................delete task handler..................
 export const deleteTask = async (taskId) => {
-  const res = await axios.delete(`${apiBaseUri}/tasks/${taskId}`, {
-    withCredentials: true,
-  });
+  const res = await authAxios.delete(`${apiBaseUri}/tasks/${taskId}`);
+  // const res = await authAxios.delete(`${apiBaseUri}/tasks/${taskId}`, {
+  //   withCredentials: true,
+  // });
 
   return res.data;
 };
@@ -74,9 +78,12 @@ export const updateTask = async (taskId, updatedData) => {
   // };
   // taskId = "def/sf"
   // const url = "apiBaseUri/tasks/def"
-  const res = await axios.put(`${apiBaseUri}/tasks/${taskId}`, updatedData, {
-    withCredentials: true,
-  });
+  const res = await authAxios.put(`${apiBaseUri}/tasks/${taskId}`, updatedData);
+  // const res = await authAxios.put(
+  //   `${apiBaseUri}/tasks/${taskId}`,
+  //   updatedData,
+  //   { withCredentials: true }
+  // );
   return res.data;
 };
 

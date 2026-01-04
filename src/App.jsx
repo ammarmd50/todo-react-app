@@ -3,16 +3,17 @@ import Login from "./pages/auth/log-In.jsx";
 import Signup from "./pages/auth/sign-Up.jsx";
 import TodoDashboard from "./pages/DashBoard/TodoDashBoard.jsx";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { apiBaseUri } from "./config/api.config.js";
+import authAxios from "./config/axios.config.js";
 
 function App() {
   const [auth, setAuth] = useState(false);
   const [user, setUser] = useState(null);
 
   const getAuth = async () => {
-    axios
-      .get(`${apiBaseUri}/auth/me`, { withCredentials: true })
+    authAxios
+      // .get(`${apiBaseUri}/auth/me`, { withCredentials: true })
+      .get(`${apiBaseUri}/auth/me`)
       .then((res) => {
         console.log("AUTH USER:", res.data.user);
         setUser(res.data.user);
