@@ -1,6 +1,7 @@
 // Api.js for backend communication
 
 import axios from "axios";
+import { apiBaseUri } from "../config/api.config";
 
 // ..................create task handler..................
 export const createTask = async (title, description) => {
@@ -9,7 +10,7 @@ export const createTask = async (title, description) => {
     description: description,
     status: "pending",
   };
-  const res = await axios.post("http://localhost:3000/tasks", payload, {
+  const res = await axios.post(`${apiBaseUri}/tasks`, payload, {
     withCredentials: true,
   });
 
@@ -24,13 +25,9 @@ export const signUpApiHandler = async (name, email, password) => {
     password: password,
   };
 
-  const axiosRes = await axios.post(
-    "http://localhost:3000/auth/signup",
-    payload,
-    {
-      withCredentials: true,
-    }
-  );
+  const axiosRes = await axios.post(`${apiBaseUri}/auth/signup`, payload, {
+    withCredentials: true,
+  });
 
   return axiosRes.data;
 };
@@ -42,31 +39,24 @@ export const loginApiHandler = async (email, password) => {
     password: password,
   };
 
-  const axiosRes = await axios.post(
-    "http://localhost:3000/auth/login",
-    payload,
-    {
-      withCredentials: true,
-    }
-  );
+  const axiosRes = await axios.post(`${apiBaseUri}/auth/login`, payload, {
+    withCredentials: true,
+  });
   return axiosRes.data;
 };
 
 //..................delete task handler..................
 export const deleteTask = async (taskId) => {
-  const res = await axios.delete(
-    `http://localhost:3000/tasks/${taskId}`,
-    {
-      withCredentials: true,
-    }
-  );
+  const res = await axios.delete(`${apiBaseUri}/tasks/${taskId}`, {
+    withCredentials: true,
+  });
 
   return res.data;
 };
 
 //..................update task handler..................
 // export const updateTask = async ( title , updatedFields) => {
-//   await fetch(`http://localhost:3000/tasks/${tasksId}`, {
+//   await fetch(`${apiBaseUri}/tasks/${tasksId}`, {
 //     method: "PUT",
 //     credentials: "include",
 //     headers: {
@@ -82,15 +72,15 @@ export const updateTask = async (taskId, updatedData) => {
   //   title: newTitle,
   //   taskId: taskId,
   // };
-  // taskId = "def/sf" 
-  // const url = "http://localhost:3000/tasks/def"
-  const res = await axios.put(`http://localhost:3000/tasks/${taskId}`, updatedData, {
+  // taskId = "def/sf"
+  // const url = "apiBaseUri/tasks/def"
+  const res = await axios.put(`${apiBaseUri}/tasks/${taskId}`, updatedData, {
     withCredentials: true,
   });
   return res.data;
 };
 
-// const res = await fetch("http://localhost:3000/tasks", {
+// const res = await fetch("apiBaseUri/tasks", {
 //   method: "POST",
 //   credentials: "include",
 //   headers: {
