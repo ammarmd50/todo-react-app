@@ -5,7 +5,7 @@ import { Task } from "../../components/task component/Task";
 import "../../App.css";
 import { fetchTasks, logout } from "../../utilities/api";
 
-function TodoDashboard({ user, auth }) {
+function TodoDashboard({ user, auth,setAuth }) {
   const navigate = useNavigate();
   // if (auth === false) {
   //   navigate("/login");
@@ -43,6 +43,8 @@ function TodoDashboard({ user, auth }) {
     //   credentials: "include",
     // });
     await logout();
+    console.log("Logged out");
+    setAuth(false);
     navigate("/login");
   };
 

@@ -7,12 +7,12 @@ function Login({ auth,setAuth}) {
   // if (auth === true) {
   //   navigate("/todos");
   // }
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
+  
+  console.log("login run after logout", auth);
   useEffect(() => {
     if (auth) {
       navigate("/todos");

@@ -98,7 +98,7 @@ export const updateTask = async (taskId, updatedData) => {
 };
 
 export const logout = async () => {
-  await authAxios.post("http://localhost:3000/auth/logout");
+  await authAxios.post(`${apiBaseUri}/auth/logout`);
 };
 
 // const res = await fetch("apiBaseUri/tasks", {

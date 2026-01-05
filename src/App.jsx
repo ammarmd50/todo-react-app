@@ -40,7 +40,7 @@ function App() {
       />
       <Route
         path="/todos"
-        element={<TodoDashboard user={user} auth={auth} />}
+        element={<TodoDashboard user={user} auth={auth} setAuth={setAuth}/>}
       />
 
       {/* default route */}
