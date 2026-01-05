@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const authAxios = axios.create({
-  baseURL: "/api", // IMPORTANT: relative URL
+  //   baseURL: "/api", // IMPORTANT: relative URL
   withCredentials: true, // IMPORTANT: send cookies
 });
 
