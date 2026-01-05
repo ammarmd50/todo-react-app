@@ -31,12 +31,9 @@ function TodoDashboard({ user, auth }) {
     //   .then((data) => setTaskArray(data))
     //   .catch((err) => console.error("Fetch tasks error:", err));
 
-    const tasks = fetchTasks()
-      .then((res) => res.json())
+    fetchTasks()
       .then((data) => setTaskArray(data))
       .catch((err) => console.error("Fetch tasks error:", err));
-    // setTaskArray(tasks);
-    // }, []);
   }, [user]);
 
   // 🔹 LOGOUT
@@ -67,11 +64,13 @@ function TodoDashboard({ user, auth }) {
 
       <TodoHeader setTaskArray={setTaskArray} userId={user.userId} />
 
-      {taskArray.length === 0 && <p>No tasks yet</p>}
-
-      {taskArray.map((task, index) => (
-        <Task key={task.taskId} task={task} setTaskArray={setTaskArray} />
-      ))}
+      {!taskArray.length || taskArray.length === 0 ? (
+        <p>No tasks yet</p>
+      ) : (
+        taskArray.map((task, index) => (
+          <Task key={task.taskId} task={task} setTaskArray={setTaskArray} />
+        ))
+      )}
 
       <button className="btn-logout" onClick={handleLogout}>
         Logout
