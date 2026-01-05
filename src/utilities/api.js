@@ -71,6 +71,16 @@ export const deleteTask = async (taskId) => {
 //   });
 // };
 
+export const fetchTasks = async () => {
+  const res = await authAxios.get(`${apiBaseUri}/tasks`);
+  // const res = await authAxios.put(
+  //   `${apiBaseUri}/tasks/${taskId}`,
+  //   updatedData,
+  //   { withCredentials: true }
+  // );
+  return res.data;
+};
+
 export const updateTask = async (taskId, updatedData) => {
   // const payload = {
   //   title: newTitle,
@@ -85,6 +95,10 @@ export const updateTask = async (taskId, updatedData) => {
   //   { withCredentials: true }
   // );
   return res.data;
+};
+
+export const logout = async () => {
+  await authAxios.post("http://localhost:3000/auth/logout");
 };
 
 // const res = await fetch("apiBaseUri/tasks", {

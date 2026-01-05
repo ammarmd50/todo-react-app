@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { TodoHeader } from "../../components/todo_header/TodoHeader";
 import { Task } from "../../components/task component/Task";
 import "../../App.css";
+import { fetchTasks, logout } from "../../utilities/api";
 
 function TodoDashboard({ user, auth }) {
   const navigate = useNavigate();
@@ -11,9 +12,9 @@ function TodoDashboard({ user, auth }) {
   // }
 
   const [taskArray, setTaskArray] = useState([]);
-  
+
   // auth guard
-   useEffect(() => {
+  useEffect(() => {
     if (!auth) {
       navigate("/login");
     }
@@ -22,22 +23,29 @@ function TodoDashboard({ user, auth }) {
   //  FETCH TASKS
   useEffect(() => {
     if (!user) return;
-  
-    fetch("http://localhost:3000/tasks", {
-      credentials: "include",
-    })
+
+    // fetch("http://localhost:3000/tasks", {
+    //   credentials: "include",
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => setTaskArray(data))
+    //   .catch((err) => console.error("Fetch tasks error:", err));
+
+    const tasks = fetchTasks()
       .then((res) => res.json())
       .then((data) => setTaskArray(data))
       .catch((err) => console.error("Fetch tasks error:", err));
+    // setTaskArray(tasks);
     // }, []);
   }, [user]);
 
   // 🔹 LOGOUT
   const handleLogout = async () => {
-    await fetch("http://localhost:3000/auth/logout", {
-      method: "POST",
-      credentials: "include",
-    });
+    // await fetch("http://localhost:3000/auth/logout", {
+    //   method: "POST",
+    //   credentials: "include",
+    // });
+    await logout();
     navigate("/login");
   };
 
@@ -61,13 +69,13 @@ function TodoDashboard({ user, auth }) {
 
       {taskArray.length === 0 && <p>No tasks yet</p>}
 
-      {taskArray.map((task,index) => (
+      {taskArray.map((task, index) => (
         <Task key={task.taskId} task={task} setTaskArray={setTaskArray} />
       ))}
 
       <button className="btn-logout" onClick={handleLogout}>
         Logout
-        </button>
+      </button>
 
       <p>
         <Link to="/login">Go to Login</Link>
