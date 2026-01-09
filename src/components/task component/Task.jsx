@@ -7,15 +7,16 @@ function Task({ task, index, setTaskArray }) {
 
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(task.title);
+  const [editDescription, setEditDescription] = useState(task.description);
   const taskId = task.taskId; 
   // UI + DB delete
   const handleDelete = async () => {
     try {
       await deleteTask(taskId);
 
-      setTaskArray((lastVal) =>
-        lastVal.filter((t) => t.taskId !== taskId)
-    );
+      setTaskArray((prev) =>
+        prev.filter((t) => t.taskId !== taskId)
+      );
 
     } catch (err) {
       console.error("Delete error:", err);
@@ -25,7 +26,10 @@ function Task({ task, index, setTaskArray }) {
   // UI + DB update
   const saveTask = async () => {
     try {
-      const updatedData = { title: editValue };
+      const updatedData = {
+        title: editValue,
+        description: editDescription
+      };
 
       const res = await updateTask(taskId,updatedData);
       //  const editedTask ={
@@ -49,12 +53,28 @@ function Task({ task, index, setTaskArray }) {
           <input 
             className="edit-input"
             type="text" 
+            placeholder="Task Title"
             value={editValue} 
             onChange={(e) => setEditValue(e.target.value)}
           />
         ) : (
-          <span>{task.title}</span>
+          <h4>{task.title}</h4>
         )}
+
+        {isEditing ? (
+          <textarea
+            className="edit-textarea"
+            placeholder="Task Description"
+            value={editDescription}
+            onChange={(e) => setEditDescription(e.target.value)}
+            rows={2}
+          />
+        ) : (
+          task.description && 
+          <p className="task-desc">{task.description}</p>
+        )}
+        
+        <span className="task-status">{task.status}</span>
       </div>
       
       <div className="task-actions">
