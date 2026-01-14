@@ -5,23 +5,35 @@ import "./Header.css";
 function TodoHeader({ setTaskArray, userId }) {
   const [taskInput, setTaskInput] = useState("");
   const [descriptionInput, setDescriptionInput] = useState("");
+  const [status, setStatus] = useState("");
+  
+  console.log("STATUS SENT:", status);
+
+
 
   const addTask = async () => {
-    if (taskInput.trim() === "") return;
+    
+    if (taskInput.trim() === "" || descriptionInput.trim() === "") {
+    alert("Please enter both task and description.");
+    return;
+  }
 
+  console.log(status)
     try {
       //   New fetch request to add task to backend
-      const res = await createTask(taskInput, " ", userId);
-
-      //   Keep UI update
+      const res = await createTask(taskInput, descriptionInput, status);
+        // Keep UI update
       const newTask = {
         title: res.title,
         description: res.description,
+        status: res.status,
         taskId: res.taskId,
       };
-      setTaskArray((prev) => [...prev, newTask]);
+      setTaskArray((prev) => [...prev,newTask]);
+
       setTaskInput("");
       setDescriptionInput("");
+      setStatus("pending");
     } catch (error) {
       console.error("Error adding task:", error);
     }
@@ -49,6 +61,17 @@ function TodoHeader({ setTaskArray, userId }) {
         onChange={(e) => setDescriptionInput(e.target.value)}
         rows={4}
       />
+      <select
+        value={status}
+        onChange={(e) =>{ setStatus(e.target.value)
+        console.log("SELECTED STATUS:", e.target.value);
+        }}
+      >
+        <option value="pending">pending</option>
+        <option value="in-progress">in-progress</option>
+        {/* <option value="completed">completed</option> */}
+        <option value="done">done</option>
+      </select>
       <button className="btn-add" onClick={addTask}>
         Add
       </button>
