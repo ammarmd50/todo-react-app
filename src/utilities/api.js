@@ -4,11 +4,11 @@ import { apiBaseUri } from "../config/api.config.js";
 import authAxios from "../config/axios.config.js";
 
 // ..................create task handler..................
-export const createTask = async (title, description) => {
+export const createTask = async (title, description, status) => {
   const payload = {
     title: title,
     description: description,
-    status: "pending",
+    status: status,
   };
   const res = await authAxios.post(`${apiBaseUri}/tasks`, payload);
   // const res = await authAxios.post(`${apiBaseUri}/tasks`, payload, {
@@ -85,9 +85,11 @@ export const updateTask = async (taskId, updatedData) => {
   // const payload = {
   //   title: newTitle,
   //   taskId: taskId,
+  //   description: newDescription,
   // };
   // taskId = "def/sf"
   // const url = "apiBaseUri/tasks/def"
+  console.log("taskID", taskId, "updatedData", updatedData);
   const res = await authAxios.put(`${apiBaseUri}/tasks/${taskId}`, updatedData);
   // const res = await authAxios.put(
   //   `${apiBaseUri}/tasks/${taskId}`,

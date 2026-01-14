@@ -69,7 +69,7 @@ function TodoDashboard({ user, auth,setAuth }) {
       {!taskArray.length || taskArray.length === 0 ? (
         <p>No tasks yet</p>
       ) : (
-        taskArray.map((task, index) => (
+        taskArray.map((task) => (
           <Task key={task.taskId} task={task} setTaskArray={setTaskArray} />
         ))
       )}
@@ -78,9 +78,7 @@ function TodoDashboard({ user, auth,setAuth }) {
         Logout
       </button>
 
-      <p>
-        <Link to="/login">Go to Login</Link>
-      </p>
+      
     </div>
   );
 }

@@ -54,11 +54,7 @@
   color: white;
 }
 
-.logout-container {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-}
+ 
 
 .task-desc {
   font-size: 0.9rem;
@@ -70,4 +66,24 @@
   width: 100%;
   resize: none;
   margin-top: 6px;
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+}
+
+.status.pending {
+  background-color: orange;
+}
+
+.status.in-progress {
+  background-color: blue;
+}
+
+.status.completed {
+  background-color: green;
 }

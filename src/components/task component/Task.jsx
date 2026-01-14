@@ -1,45 +1,57 @@
 //Task.jsx
 import { deleteTask, updateTask } from "../../utilities/api";
-import { useState } from "react";
-// import "./Task.css";
-
+import { useState, useEffect, use } from "react";
+// import "../task component/Task.css";
+import "../../App.css";
 function Task({ task, index, setTaskArray }) {
-
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(task.title);
   const [editDescription, setEditDescription] = useState(task.description);
-  const taskId = task.taskId; 
+  const taskId = task.taskId;
+
+  useEffect(() => {
+    setEditValue(task.title);
+    setEditDescription(task.description);
+  }, [task.title, task.description]);
   // UI + DB delete
   const handleDelete = async () => {
     try {
       await deleteTask(taskId);
 
-      setTaskArray((prev) =>
-        prev.filter((t) => t.taskId !== taskId)
-      );
-
+      setTaskArray((prev) => prev.filter((t) => t.taskId !== taskId));
     } catch (err) {
       console.error("Delete error:", err);
     }
   };
 
   // UI + DB update
-  const saveTask = async () => {
+  const handleUpdate = async () => {
     try {
       const updatedData = {
         title: editValue,
-        description: editDescription
+        description: editDescription,
+        // status: task.status
       };
-
-      const res = await updateTask(taskId,updatedData);
+      console.log("descri", editDescription);
+      console.log("payload:", updatedData);
+      const res = await updateTask(taskId, updatedData);
       //  const editedTask ={
-      //   title: res.title
-      //  }  
-        setTaskArray(prev =>
-          prev.map(t =>
-            t.taskId === task.taskId ? res : t
-          )
-        );      // setTaskArray((lastVal) => [...lastVal, editedTask]);
+      //   title: res.title,
+      //   description: res.description,
+      //  }
+      setTaskArray((prev) =>
+        prev.map((t) =>
+          t.taskId === res.taskId
+            ? { ...t, title: editValue, description: editDescription }
+            : t
+        )
+      );
+
+      // setTaskArray(prev =>
+      //   prev.map((t) => t.taskId === res.taskId ? res : t)
+      // );
+      console.log("updated title and desc:", res);
+      // setTaskArray((lastVal) => [...lastVal, editedTask]);
       setIsEditing(false);
     } catch (err) {
       console.error("Update error:", err);
@@ -50,11 +62,11 @@ function Task({ task, index, setTaskArray }) {
     <div className="task-item">
       <div className="task-content">
         {isEditing ? (
-          <input 
+          <input
             className="edit-input"
-            type="text" 
+            type="text"
             placeholder="Task Title"
-            value={editValue} 
+            value={editValue}
             onChange={(e) => setEditValue(e.target.value)}
           />
         ) : (
@@ -70,16 +82,16 @@ function Task({ task, index, setTaskArray }) {
             rows={2}
           />
         ) : (
-          task.description && 
-          <p className="task-desc">{task.description}</p>
+          task.description && <p className="task-desc">{task.description}</p>
         )}
-        
+
         <span className="task-status">{task.status}</span>
+        {/* <span className={`status ${task.status}`}>{task.status}</span> */}
       </div>
-      
+
       <div className="task-actions">
         {isEditing ? (
-          <button className="btn-save" onClick={saveTask}>
+          <button className="btn-save" onClick={handleUpdate}>
             SAVE
           </button>
         ) : (
@@ -89,7 +101,7 @@ function Task({ task, index, setTaskArray }) {
         )}
 
         <button className="btn-delete" onClick={handleDelete}>
-         DELETE 
+          DELETE
         </button>
       </div>
     </div>
