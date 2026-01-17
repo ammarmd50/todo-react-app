@@ -59,7 +59,8 @@ function TodoHeader({ setTaskArray, userId }) {
         type="text"
         value={descriptionInput}
         onChange={(e) => setDescriptionInput(e.target.value)}
-        rows={4}
+        rows={1}
+        cols={30}
       />
       <select
         value={status}

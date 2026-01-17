@@ -1,22 +1,49 @@
+
 .todo-header {
   display: flex;
   gap: 10px;
   margin-bottom: 2rem;
 }
 
-.todo-header input {
-  flex: 1;
+/* common styles */
+.todo-header input,
+.todo-header textarea,
+.todo-header select {
   font-size: 1rem;
+  padding: 10px;
   border: 2px solid #eee;
-  transition: border-color 0.3s;
+  border-radius: 6px;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.todo-header input:focus {
+/* focus highlight */
+.todo-header input:focus,
+.todo-header textarea:focus,
+.todo-header select:focus {
   border-color: var(--primary-color);
+  outline: color-mix(in srgb, var(--primary-color), #ffffff);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+/* textarea tweaks */
+.todo-header textarea {
+  resize: none;
+overflow: hidden;
+  min-height: 40px;
+  max-height: 120px;
+  flex: 1;
+}
+
+/* select cursor */
+.todo-header select {
+  cursor: pointer;
 }
 
 .btn-add {
   background-color: var(--primary-color);
   color: white;
   padding: 0 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
